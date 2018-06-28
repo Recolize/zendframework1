@@ -317,7 +317,10 @@ class Zend_Session extends Zend_Session_Abstract
             self::$_regenerateIdState = -1;
         } else {
             if (!self::$_unitTestEnabled) {
-                session_regenerate_id(true);
+                /**
+                 * Fix for PHP 7.2: somehow if delete_old_session is set to true it may happen that warnings occur.
+                 */
+                @session_regenerate_id(true);
             }
             self::$_regenerateIdState = 1;
         }

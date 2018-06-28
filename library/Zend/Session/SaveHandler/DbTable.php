@@ -347,9 +347,14 @@ class Zend_Session_SaveHandler_DbTable
         if (count($rows)) {
             $data[$this->_lifetimeColumn] = $this->_getLifetime($rows->current());
 
-            if ($this->update($data, $this->_getPrimary($id, self::PRIMARY_TYPE_WHERECLAUSE))) {
-                $return = true;
-            }
+            $numberOfRowsAffected = $this->update($data, $this->_getPrimary($id, self::PRIMARY_TYPE_WHERECLAUSE));
+            /**
+             * Fix for PHP 7.2: the return value of this write() method is evaluated more closely in PHP 7.2 and leads to
+             * Warning: session_write_close(): Failed to write session data using user defined save handler.
+             * in case that 0 is returned. As the PDO update() method returns 0 if the content to update did not change we
+             * have to return true in all cases here.
+             */
+            return true;
         } else {
             $data[$this->_lifetimeColumn] = $this->_lifetime;
 
