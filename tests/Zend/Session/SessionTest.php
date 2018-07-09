@@ -85,7 +85,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        ini_set('session.save_path', $this->_savePath);
+        @ini_set('session.save_path', $this->_savePath);
 
         $this->assertSame(
             E_ALL | E_STRICT,
@@ -122,6 +122,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * test session id manipulations; expect isRegenerated flag == true
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -163,6 +165,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that setOptions() behaves as expected
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testSetOptions()
@@ -184,6 +188,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test for initialisation without parameter; expect instance
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testInit()
@@ -194,6 +200,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * test for initialisation with empty string; expect failure
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -212,6 +220,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test for initialisation with Session parameter; expect instance
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testInitSession()
@@ -222,6 +232,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * test for initialisation with single instance; expected instance
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -243,6 +255,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      * test for retrieval of non-existent keys in a valid namespace; expected null value
      * returned by getter for an unset key
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testNamespaceGetNull()
@@ -260,6 +274,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test for existence of namespace; expected true
      *
+     * @runInSeparateProcess
      * @return void
      */
     public function testNamespaceIsset()
@@ -280,6 +295,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * test magic methods with improper variable interpolation; expect no exceptions
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -331,6 +348,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      * test for proper separation of namespace "spaces"; expect variables in different namespaces are
      * different variables (i.e., not shared values)
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testInitNamespaces()
@@ -355,6 +374,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      * test for detection of illegal namespace names; expect exception complaining about name beginning
      * with an underscore
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testInitNamespaceUnderscore()
@@ -372,6 +393,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      * test for detection of illegal namespace names; expect exception complaining about name beginning
      * with an underscore
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testInitNamespaceNumber()
@@ -387,6 +410,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * test iteration; expect native PHP foreach statement is able to properly iterate all items in a session namespace
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -417,6 +442,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test locking of the Default namespace (i.e. make namespace readonly); expect exceptions when trying to write to
      * locked namespace
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -452,6 +479,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test locking of named namespaces (i.e. make namespace readonly); expect exceptions when trying to write
      * to locked namespace
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -491,6 +520,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test unlocking of the Default namespace (i.e. make namespace readonly); expected no exceptions
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testUnlock()
@@ -516,6 +547,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test combinations of locking and unlocking of the Default namespace (i.e. make namespace readonly)
      * expected no exceptions
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -559,6 +592,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      * test isLocked() unary comparison operator under various situations; expect lock status remains synchronized
      * with last call to unlock() or lock(); expect no exceptions
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testIsLocked()
@@ -590,6 +625,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test unlocking of named namespaces (i.e., make namespace readonly); expect no exceptions
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testUnLockNamespace()
@@ -617,6 +654,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test isLocked() unary comparison operator under various situations; expect lock status remains synchronized with
      * last call to unlock() or lock(); expect no exceptions
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -652,6 +691,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test unsetAll keys in default namespace; expect namespace contains only keys not unset()
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testUnsetAll()
@@ -685,6 +726,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test unset() keys in default namespace; expect namespace contains only keys not unset()
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testUnset()
@@ -715,6 +758,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
     /**
      * test unset() keys in non-default namespace; expect namespace contains only keys not unset()
      *
+     * @runInSeparateProcess
+     *
      * @return void
      */
     public function testUnsetNamespace()
@@ -743,6 +788,8 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * test unsetAll keys in default namespace; expect namespace will contain no keys
+     *
+     * @runInSeparateProcess
      *
      * @return void
      */
@@ -1024,6 +1071,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-5003
+     * @runInSeparateProcess
      */
     public function testProcessSessionMetadataShouldNotThrowAnError()
     {
@@ -1038,6 +1086,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      * test for method getNamespace()
      *
      * @group ZF-1982
+     * @runInSeparateProcess
      * @return void
      */
     public function testGetNameSpaceMethod()
@@ -1057,6 +1106,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-11186
+     * @runInSeparateProcess
      */
     public function testNoNoticesIfNoValidatorDataInSession()
     {
@@ -1071,6 +1121,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-3378
+     * @runInSeparateProcess
      */
     public function testInvalidPreexistingSessionIdDoesNotPreventRegenerationOfSid()
     {

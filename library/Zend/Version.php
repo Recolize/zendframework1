@@ -32,7 +32,7 @@ final class Zend_Version
     /**
      * Zend Framework version identification - see compareVersion()
      */
-    const VERSION = '1.12.21dev';
+    const VERSION = '2.0.0';
 
     /**
      * The latest stable version Zend Framework available
